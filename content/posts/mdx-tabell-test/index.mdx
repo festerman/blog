@@ -1,0 +1,212 @@
+---
+title: Testar hur man gör tabeller i MDX ...
+date: 2020-03-22
+description: Testar tabell-formattering
+slug: /mdx-tabell-test
+tags:
+    - gatsby
+    - test
+---
+
+### Tabeller i MDX
+
+#### Förutsättningar
+
+Installerat [remark-grid-tables](https://www.gatsbyjs.org/packages/gatsby-remark-grid-tables/).
+
+#### Variant 1: som `remark-grid-tables` säger att det ska se ut:
+
+```mdx
++-------+----------+------+
+| Table Headings   | Here |
++-------+----------+------+
+| Sub   | Headings | Too  |
++=======+==========+======+
+| cell  | column spanning |
++ spans +----------+------+
+| rows  | normal   | cell |
++-------+----------+------+
+| multi | cells can be    |
+| line  | *formatted*     |
+|       | **paragraphs**  |
+| cells |                 |
+| too   |                 |
++-------+-----------------+
+```
+---
++-------+----------+------+
+| Table Headings   | Here |
++-------+----------+------+
+| Sub   | Headings | Too  |
++=======+==========+======+
+| cell  | column spanning |
++ spans +----------+------+
+| rows  | normal   | cell |
++-------+----------+------+
+| multi | cells can be    |
+| line  | *formatted*     |
+|       | **paragraphs**  |
+| cells |                 |
+| too   |                 |
++-------+-----------------+
+---
+... och det funkar ju inte ...
+
+#### Variant 2: som [Tables Generator](https://www.tablesgenerator.com/markdown_tables) säger de ska se ut
+
+En förenklad variant av den ovan:
+```mdx
+| Table  | Headings  | Here  |
+|---|---|---|
+| cell  | cell  | cell  |
+| cell  | cell  | cell  |
+```
+---
+| Table  | Headings  | Here  |
+|---|---|---|
+| cell  | cell  | cell  |
+| cell  | cell  | cell  |
+---
+... och det funkar! Prova att tweaka exemplet:
+
+```mdx
+| Table Headings   | Here |
+| Sub   | Headings | Too  |
+|-------|----------|------|
+| cell  | column spanning |
+| spans |----------|------|
+| rows  | normal   | cell |
+|-------|----------|------|
+| multi | cells can be    |
+| line  | *formatted*     |
+|       | **paragraphs**  |
+| cells |                 |
+| too   |                 |
+|-------|-----------------|
+```
+---
+| Table Headings   | Here |
+| Sub   | Headings | Too  |
+|-------|----------|------|
+| cell  | column spanning |
+| spans |----------|------|
+| rows  | normal   | cell |
+|-------|----------|------|
+| multi | cells can be    |
+| line  | *formatted*     |
+|       | **paragraphs**  |
+| cells |                 |
+| too   |                 |
+|-------|-----------------|
+
+---
+... det funkar ju inte ...
+
+#### Kolla hur det funkar utan [remark-grid-tables](https://www.gatsbyjs.org/packages/gatsby-remark-grid-tables/).
+
+```bash
+npm uninstall --save remark-grid-tables
+```
+
+och titta här ovan -- och vi har samma resultat. Så Gatsby-plugin-en hade ingen effekt, och MDX-pluginen har stöd för bara för enkla tabeller. 
+
+#### html
+
+```html
+<table>
+<tbody>
+<tr><th colspan="2">Table Headings</th><th>Here</th></tr>
+<tr><th>Sub</th><th>Headings</th><th>Too</th></tr>
+<tr><td rowspan="2">cell spans rows</td><td colspan="2">column spanning</td></tr>
+<tr><td>normal</td><td>cell</td></tr>
+<tr><td>
+multi<br/>
+line<br/>
+<br/>
+cells<br/>
+too
+</td><td>
+<p>cells can be <em>formatted</em> <strong>paragraphs</strong></p></td></tr>
+</tbody>
+</table>
+```
+---
+<table>
+<tbody>
+<tr><th colspan="2">Table Headings</th><th>Here</th></tr>
+<tr><th>Sub</th><th>Headings</th><th>Too</th></tr>
+<tr><td rowspan="2">cell spans rows</td><td colspan="2">column spanning</td></tr>
+<tr><td>normal</td><td>cell</td></tr>
+<tr><td>
+multi<br/>
+line<br/>
+<br/>
+cells<br/>
+too
+</td><td>
+<p>cells can be <em>formatted</em> <strong>paragraphs</strong></p></td></tr>
+</tbody>
+</table>
+
+---
+
+Och det är ju inte så bekvämt :(
+
+#### OK, så några _corner cases_ utan html
+
+##### utan _headings_
+```mdx
+|---|---|---|
+| cell  | cell  | cell  |
+| cell  | cell  | cell  |
+```
+---
+|---|---|---|
+| cell  | cell  | cell  |
+| cell  | cell  | cell  |
+
+---
+
+eller 
+```mdx
+| cell  | cell  | cell  |
+| cell  | cell  | cell  |
+```
+---
+| cell  | cell  | cell  |
+| cell  | cell  | cell  |
+
+---
+
+... funkar inte :(. Testa med **tom** huvudtext:
+
+```mdx
+| | |
+|---|---|---|
+| cell  | cell  | cell  |
+| cell  | cell  | cell  |
+```
+---
+| | |
+|---|---|---|
+| cell  | cell  | cell  |
+| cell  | cell  | cell  |
+---
+... _et voilà_, det ser ju lite bättre ut ... För att det ska funka behövs också en tom rad före och efter, eller möjligen något annat som bryter (`<hr>` ovan). Vad händer om man försöker få till en "separator"-linje i slutet också?
+```mdx
+| | |
+|---|---|---|
+| cell  | cell  | cell  |
+| cell  | cell  | cell  |
+|---|---|---|
+```
+---
+| | |
+|---|---|---|
+| cell  | cell  | cell  |
+| cell  | cell  | cell  |
+|---|---|---|
+---
+
+... funkar inte.
+

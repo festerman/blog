@@ -5,6 +5,8 @@ require(`dotenv`).config({
 const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE;
 module.exports = {
   siteMetadata: {
+    siteTitle: `BFiles`,
+    author: `festerman`,
     siteTitleAlt: `Minimal Blog - Gatsby Theme`,
   },
   plugins: [
@@ -12,34 +14,35 @@ module.exports = {
       resolve: `@lekoarts/gatsby-theme-minimal-blog`,
       // See the theme's README for all available options
       options: {
+        formatString: `YYYY-MM-DD`,
         navigation: [
           {
-            title: `Blog`,
+            title: `Blogg`,
             slug: `/blog`,
           },
           {
-            title: `About`,
+            title: `Om`,
             slug: `/about`,
           },
         ],
         externalLinks: [
           {
-            name: `Twitter`,
-            url: `https://twitter.com/lekoarts_de`,
+            name: `Anbytarforum`,
+            url: `https://forum.rotter.se/index.php?action=profile;u=63160`,
           },
           {
-            name: `Instagram`,
-            url: `https://www.instagram.com/lekoarts.de/`,
-          },
+            name: `WikiTree`,
+            url: `https://www.wikitree.com/wiki/Bergh-906`,
+          },          
         ],
       },
     },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: process.env.GOOGLE_ANALYTICS_ID,
-      },
-    },
+//    {
+//      resolve: `gatsby-plugin-google-analytics`,
+//      options: {
+//        trackingId: process.env.GOOGLE_ANALYTICS_ID,
+//      },
+//    },
     `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -82,20 +85,20 @@ module.exports = {
         path: "src/images/",
       },
     },
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
-    {
-      resolve: "gatsby-plugin-mdx",
-      options: {
-        gatsbyRemarkPlugins: [
-          {
-            resolve: "gatsby-remark-images",
-            options: {
-              maxWidth: 1200,
-            },
-          },
-        ],
-      },
-    },
+//    "gatsby-plugin-sharp",
+//    "gatsby-transformer-sharp",
+//    {
+//      resolve: "gatsby-plugin-mdx",
+//      options: {
+//        gatsbyRemarkPlugins: [
+//          {
+//            resolve: "gatsby-remark-images",
+//            options: {
+//              maxWidth: 1200,
+//            },
+//          },
+//        ],
+//      },
+//    },
   ].filter(Boolean),
 };
