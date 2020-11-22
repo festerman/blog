@@ -82,13 +82,13 @@ module.exports = {
         openAnalyzer: false,
       },
     },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "MDXImages",
-        path: "src/images/",
-      },
-    },
+//    {
+//      resolve: "gatsby-source-filesystem",
+//      options: {
+//        name: "MDXImages",
+//        path: "src/images/",
+//      },
+//    },
 // already in the theme
 //    "gatsby-plugin-sharp",
 //    "gatsby-transformer-sharp",
