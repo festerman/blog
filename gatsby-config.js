@@ -17,6 +17,10 @@ module.exports = {
         formatString: `YYYY-MM-DD`,
         navigation: [
           {
+            title: `Sidor`,
+            slug: `/pages`,
+          },
+          {
             title: `Blogg`,
             slug: `/blog`,
           },
@@ -85,6 +89,7 @@ module.exports = {
         path: "src/images/",
       },
     },
+// already in the theme
 //    "gatsby-plugin-sharp",
 //    "gatsby-transformer-sharp",
 //    {

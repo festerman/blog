@@ -8,8 +8,8 @@ import useMinimalBlogConfig from "@lekoarts/gatsby-theme-minimal-blog/src/hooks/
 import replaceSlashes from "@lekoarts/gatsby-theme-minimal-blog/src/utils/replaceSlashes"
 import SEO from "@lekoarts/gatsby-theme-minimal-blog/src/components/seo"
 
-type PostsProps = {
-  posts: {
+type PagesProps = {
+  pages: {
     slug: string
     title: string
     date: string
@@ -23,21 +23,21 @@ type PostsProps = {
   }[]
 }
 
-const Blog = ({ posts }: PostsProps) => {
+const Pages = ({ pages }: PagesProps) => {
   const { tagsPath, basePath } = useMinimalBlogConfig()
 
   return (
     <Layout>
-      <SEO title="Blogg" />
+      <SEO title="Sidor" />
       <Flex sx={{ alignItems: `center`, justifyContent: `space-between`, flexFlow: `wrap` }}>
-        <Styled.h2>Blogg</Styled.h2>
+        <Styled.h2>Sidor</Styled.h2>
         <Styled.a as={Link} sx={{ variant: `links.secondary` }} to={replaceSlashes(`/${basePath}/${tagsPath}`)}>
           Alla taggar
         </Styled.a>
       </Flex>
-      <Listing posts={posts} sx={{ mt: [2, 3] }} />
+      <Listing posts={pages} sx={{ mt: [4, 5] }} />
     </Layout>
   )
 }
 
-export default Blog
+export default Pages
