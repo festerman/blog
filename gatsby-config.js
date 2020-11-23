@@ -7,7 +7,7 @@ module.exports = {
   siteMetadata: {
     siteTitle: `BFiles`,
     author: `festerman`,
-    siteTitleAlt: `Minimal Blog - Gatsby Theme`,
+    siteTitleAlt: `BFiles`,
   },
   plugins: [
     {
