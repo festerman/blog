@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Styled } from "theme-ui"
+import { jsx, Themed } from "theme-ui"
 import { Link } from "gatsby"
 import { Flex } from "@theme-ui/components"
 import Layout from "@lekoarts/gatsby-theme-minimal-blog/src/components/layout"
@@ -13,6 +13,7 @@ type PostsProps = {
     slug: string
     title: string
     date: string
+    updated: string
     excerpt: string
     description: string
     timeToRead: number
@@ -30,10 +31,10 @@ const Blog = ({ posts }: PostsProps) => {
     <Layout>
       <SEO title="Blogg" />
       <Flex sx={{ alignItems: `center`, justifyContent: `space-between`, flexFlow: `wrap` }}>
-        <Styled.h2>Blogg</Styled.h2>
-        <Styled.a as={Link} sx={{ variant: `links.secondary` }} to={replaceSlashes(`/${basePath}/${tagsPath}`)}>
+        <Themed.h2>Blogg</Themed.h2>
+        <Themed.a as={Link} sx={{ variant: `links.secondary` }} to={replaceSlashes(`/${basePath}/${tagsPath}`)}>
           Alla taggar
-        </Styled.a>
+        </Themed.a>
       </Flex>
       <Listing posts={posts} sx={{ mt: [2, 3] }} />
     </Layout>

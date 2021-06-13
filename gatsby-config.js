@@ -25,6 +25,10 @@ module.exports = {
             slug: `/blog`,
           },
           {
+            title: `Taggar`,
+            slug: `/tags`,
+          },
+          {
             title: `Om`,
             slug: `/about`,
           },
